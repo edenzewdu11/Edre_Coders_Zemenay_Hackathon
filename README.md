@@ -62,27 +62,28 @@ NEXT_PUBLIC_SUPABASE_URL=https://hhaqtqlhiihlicadimkc.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoYXF0cWxoaWlobGljYWRpbWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1NTY2NjUsImV4cCI6MjA3MDEzMjY2NX0.WpXROJQSDKxyzRilyUbmUnlSLxzW9orQn4Nllk3t3Hw
 
 
-# For DatabaseService compatibility
+## For DatabaseService compatibility
 SUPABASE_URL=https://hhaqtqlhiihlicadimkc.supabase.co
 SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoYXF0cWxoaWlobGljYWRpbWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1NTY2NjUsImV4cCI6MjA3MDEzMjY2NX0.WpXROJQSDKxyzRilyUbmUnlSLxzW9orQn4Nllk3t3Hw
 
 
-# Server Configuration
+## Server Configuration
 PORT=3001
 NODE_ENV=development
 
 
-# CORS Configuration
+## CORS Configuration
 CORS_ORIGIN=http://localhost:3000
 
 
-# JWT Configuration
+## JWT Configuration
 JWT_SECRET=your_secure_jwt_secret_here
 JWT_EXPIRES_IN=1d
 
         ```
         
-4.  **Start Development Servers:**
+4.
+5. **Start Development Servers:**
 
     * **Terminal 1 - Backend:**
         ```bash
