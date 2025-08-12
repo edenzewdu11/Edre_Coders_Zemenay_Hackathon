@@ -1,4 +1,4 @@
- 🚀 Zemenay Blog System
+# 🚀 Zemenay Blog System
 
 A professional, plug-and-play blog system for Next.js applications, complete with an admin panel, authentication, and full CRUD (Create, Read, Update, Delete) operations. Built for the Zemenay Tech Solutions Hackathon.
 
