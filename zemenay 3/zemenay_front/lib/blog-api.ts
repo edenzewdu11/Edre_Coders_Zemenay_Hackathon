@@ -220,11 +220,7 @@ export const addTagToPost = async (postId: string, tagId: string) => {
 // Categories API
 export const getCategories = async (): Promise<any[]> => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch categories: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiClient.getCategories();
   } catch (error) {
     console.error('Error fetching categories:', error);
     throw error;
