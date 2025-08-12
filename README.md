@@ -131,8 +131,6 @@ zemenay-blog-system/
 
 ### Frontend Highlights
 
-  * **Responsive Design**: Optimized for all devices, from mobile to desktop.
-  * **Dark Mode**: A user-selectable theme for enhanced readability.
   * **Real-time Updates**: Live data synchronization for a dynamic user experience.
   * **SEO Optimized**: Built-in meta tags and structured data for better search engine visibility.
   * **High Performance**: Optimized loading and caching for fast page loads.
