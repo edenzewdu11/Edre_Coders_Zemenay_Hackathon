@@ -102,6 +102,31 @@ The project is split into two applications: `zemenay_front` for the Next.js fron
 
 -----
 
+```
+zemenay-blog-system/
+├── zemenay_front/                 # Next.js Frontend
+│   ├── app/                      # App Router
+│   │   ├── admin/               # Admin Panel
+│   │   ├── blog/                # Public Blog
+│   │   ├── login/               # Authentication
+│   │   └── signup/              # User Registration
+│   ├── components/              # Reusable Components
+│   │   ├── admin/              # Admin Components
+│   │   ├── blog/               # Blog Components
+│   │   └── ui/                 # UI Components
+│   ├── lib/                    # Utilities & API
+│   └── hooks/                  # Custom Hooks
+├── zemenay_back/                # NestJS Backend
+│   ├── src/
+│   │   ├── auth/               # Authentication
+│   │   ├── posts/              # Blog Posts
+│   │   ├── users/              # User Management
+│   │   └── comments/           # CommentManagement
+│   └── test/                   # Tests
+└── docs/                       # Documentation
+```
+
+
 ## 🎨 Features
 
 ### Frontend Highlights
