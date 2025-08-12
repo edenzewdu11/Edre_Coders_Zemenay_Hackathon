@@ -13,7 +13,7 @@ The **Zemenay Blog System** was designed to solve a common problem for Next.js d
 
 ### Key Features:
 
-  * **Admin Panel**: A complete content management system for posts, users, and tags.
+  * **Admin Panel**: A complete content management system for posts, users, and Comments.
   * **Authentication**: Secure JWT-based authentication with role management (admin vs. regular user).
   * **Real-time Stats**: A dynamic dashboard with live data insights.
   * **Professional UI**: A modern, responsive, and intuitive user interface built with **Tailwind CSS**.
