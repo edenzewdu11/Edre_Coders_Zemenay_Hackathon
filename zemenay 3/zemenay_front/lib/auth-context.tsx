@@ -46,8 +46,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const initializeAuth = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('access_token');
         if (token) {
+          // Initialize API client token
+          const { apiClient } = await import('@/lib/api-client');
+          apiClient.setToken(token);
+          
           // If we have a token, try to get the user profile
           const response = await fetch('http://localhost:3001/auth/profile', {
             headers: {
@@ -66,14 +70,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             });
           } else {
             // If the token is invalid, clear it
-            localStorage.removeItem('token');
+            localStorage.removeItem('access_token');
             setUser(null);
             setSessionState(null);
           }
         }
       } catch (error) {
         console.error('Failed to initialize auth:', error);
-        localStorage.removeItem('token');
+        localStorage.removeItem('access_token');
         setUser(null);
         setSessionState(null);
       } finally {
@@ -92,9 +96,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const setSession = (newSession: Session | null) => {
     setSessionState(newSession);
     if (newSession?.access_token) {
-      localStorage.setItem('token', newSession.access_token);
+      localStorage.setItem('access_token', newSession.access_token);
+      const { apiClient } = import('@/lib/api-client');
+      apiClient.setToken(newSession.access_token);
     } else {
-      localStorage.removeItem('token');
+      localStorage.removeItem('access_token');
+      const { apiClient } = import('@/lib/api-client');
+      apiClient.setToken(null);
     }
   };
 
@@ -164,7 +172,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       console.error('Failed to sign out:', error);
     } finally {
-      localStorage.removeItem('token');
+      localStorage.removeItem('access_token');
       setSession(null);
       setUser(null);
       router.push('/login');
