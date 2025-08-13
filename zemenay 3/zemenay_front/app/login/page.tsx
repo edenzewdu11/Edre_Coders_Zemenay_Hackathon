@@ -24,42 +24,54 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    console.log('🔑 Login form submitted');
-    
-    // Basic validation
-    if (!formData.email || !formData.password) {
-      toast({
-        title: 'Error',
-        description: 'Please enter both email and password',
-        variant: 'destructive',
-      });
-      return;
-    }
-
     setIsSubmitting(true);
-    
+
     try {
+      console.log('🔑 Login form submitted');
+      
+      // Basic validation
+      if (!formData.email || !formData.password) {
+        toast({
+          title: 'Error',
+          description: 'Please enter both email and password',
+          variant: 'destructive',
+        });
+        return;
+      }
+
       console.log('🔐 Attempting login with:', { email: formData.email });
       
+      // Verify API URL is set
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+      console.log('🌐 Using API URL:', apiUrl);
+      
       // Call the backend auth login endpoint
-      const response = await fetch('http://localhost:3001/auth/login', {
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           email: formData.email.trim(),
           password: formData.password,
         }),
-        credentials: 'include' // Important for cookies/session
+        credentials: 'include'
       });
+
+      // Check if response is JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('❌ Non-JSON response:', text);
+        throw new Error('Server returned an invalid response. Please check the API URL and try again.');
+      }
 
       const data = await response.json();
 
       if (!response.ok) {
         console.error('❌ Login error:', data);
-        throw new Error(data.message || 'Login failed');
+        throw new Error(data.message || 'Login failed. Please check your credentials and try again.');
       }
 
       console.log('✅ Login successful!', data);
@@ -72,7 +84,7 @@ export default function LoginPage() {
         apiClient.setToken(data.access_token);
         
         // Manually set the session in the auth context
-        setSession({
+        await setSession({
           access_token: data.access_token,
           refresh_token: data.refresh_token || '',
           user: data.user,
@@ -100,7 +112,6 @@ export default function LoginPage() {
         variant: 'destructive',
       });
     } finally {
-      console.log('🏁 Login attempt completed');
       setIsSubmitting(false);
     }
   };
