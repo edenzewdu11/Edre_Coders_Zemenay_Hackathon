@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/lib/auth-context';
 import { LogIn, ArrowLeft } from 'lucide-react';
+import { apiClient } from '@/lib/api-client';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -65,7 +66,10 @@ export default function LoginPage() {
       
       // Store the token in localStorage
       if (data.access_token) {
-        localStorage.setItem('token', data.access_token);
+        localStorage.setItem('access_token', data.access_token);
+        
+        // Update the API client's token
+        apiClient.setToken(data.access_token);
         
         // Manually set the session in the auth context
         setSession({
