@@ -124,7 +124,11 @@ class ApiClient {
     this.baseURL = baseURL;
     // Initialize token from localStorage if available
     if (typeof window !== 'undefined') {
-      this.accessToken = localStorage.getItem('access_token');
+      const token = localStorage.getItem('access_token');
+      if (token) {
+        this.accessToken = token;
+        console.log('API Client: Token initialized from localStorage');
+      }
     }
   }
 
@@ -132,8 +136,10 @@ class ApiClient {
     this.accessToken = token;
     if (token && typeof window !== 'undefined') {
       localStorage.setItem('access_token', token);
+      console.log('API Client: Token set in localStorage');
     } else if (typeof window !== 'undefined') {
       localStorage.removeItem('access_token');
+      console.log('API Client: Token removed from localStorage');
     }
   }
 
