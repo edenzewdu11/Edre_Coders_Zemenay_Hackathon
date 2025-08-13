@@ -93,15 +93,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAuthor = user?.role === 'author' || isAdmin; // Admins can also be authors
   const isEditor = user?.role === 'editor' || isAdmin; // Admins can also be editors
 
-  const setSession = (newSession: Session | null) => {
+  const setSession = async (newSession: Session | null) => {
     setSessionState(newSession);
+    
+    // Import the apiClient
+    const { apiClient } = await import('@/lib/api-client');
+    
     if (newSession?.access_token) {
       localStorage.setItem('access_token', newSession.access_token);
-      const { apiClient } = import('@/lib/api-client');
       apiClient.setToken(newSession.access_token);
     } else {
       localStorage.removeItem('access_token');
-      const { apiClient } = import('@/lib/api-client');
       apiClient.setToken(null);
     }
   };
